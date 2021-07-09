@@ -1,0 +1,134 @@
+---
+title: Mappa eventi estremi 2020
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    navbar:
+      - icon: "fa-home"
+        href: "http://www.scia.isprambiente.it/"
+        align: right
+    social: menu
+    css: mappa_estremi.css
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+library("tidyverse")
+library("leaflet")
+library("leafem")
+library("flexdashboard")
+ANNO<-2020
+STAGIONE_NOAA<-"Annuale"
+nomeFile<-glue::glue("{ANNO}_eventi_estremi.csv")
+```
+
+## {data-width=1000}
+
+###  Febbraio molto caldo: record di temperatura massima giornaliera in diverse localita' del Centro-Nord
+
+```{r}
+valueBox("Inverno (Gennaio - Febbraio)",icon="",col="#1f78b4")
+```
+
+### Freddo, venti intensi e piogge a fine marzo, successivamente stagione calda e siccitosa
+
+```{r}
+valueBox("Primavera",icon="",color="#33a02c")
+```
+
+### Moderatamente piovosa, con temporali, piogge intense, forte vento e locali grandinate.
+
+```{r}
+valueBox("Estate",icon="", col="#ff7f00")
+```
+
+### Fenomeni alluvionali ad inizio ottobre al Nord-Ovest, piogge intense e persistenti a novembre al Sud 
+
+```{r}
+valueBox("Autunno",icon="",col="#fdb462")
+```
+
+### Precipitazioni eccezionalmente abbondanti al centro-nord, venti intensi sul Tirreno
+
+```{r}
+valueBox("Dicembre",icon="",color="#1f78b4")
+```
+
+
+## Mappa estremi in Italia e nel mondo
+
+
+### {data-width=1000}
+
+```{r mappa,include=TRUE}
+
+read_delim(nomeFile,delim=";",col_names = TRUE)->eventi
+
+leaflet() %>%
+  setView(lng=10,lat=42,zoom=6) %>%
+  addProviderTiles(provider="Stamen.Toner")->mappa
+
+mappa %>%
+  addCircleMarkers(lng=~Lon,lat=~Lat,data=eventi %>% filter(Stagione=="Inverno") ,group="Inverno",popup = ~testo,color=~colori,stroke=FALSE,fillOpacity = 0.8) %>%
+  addCircleMarkers(lng=~Lon,lat=~Lat,data=eventi %>% filter(Stagione=="Primavera") ,group="Primavera",popup = ~testo,color=~colori,stroke=FALSE,fillOpacity = 0.8) %>%
+  addCircleMarkers(lng=~Lon,lat=~Lat,data=eventi %>% filter(Stagione=="Estate") ,group="Estate",popup = ~testo,color=~colori,stroke=FALSE,fillOpacity = 0.8) %>%
+  addCircleMarkers(lng=~Lon,lat=~Lat,data=eventi %>% filter(Stagione=="Autunno e dicembre") ,group="Autunno e dicembre",popup =
+                     ~testo,color=~colori,stroke=FALSE,fillOpacity = 0.8) %>%  
+  #addCircleMarkers(lng=~Lon,lat=~Lat,data=eventi %>% filter(Stagione==STAGIONE_NOAA) ,group=STAGIONE_NOAA,popup =
+  #                   ~testo,color=~colori,stroke=FALSE,fillOpacity = 0.8) %>%   
+  addLayersControl(overlayGroups = c("Inverno","Primavera","Estate","Autunno e dicembre"),options =layersControlOptions(collapsed = FALSE)) %>%
+  addHomeButton(raster::extent(7,18,38,46),"home")
+
+#addControl(html="<h2>Eventi estremi 2020</h2><div>Gli indicatori del Clima in Italia</div>",position = "bottomleft")
+```
+
+
+### {data-width=200}
+
+**Si ringraziano per le informazioni fornite:**
+
+[Dipartimento di Protezione Civile Nazionale](https://www.protezionecivile.gov.it/it/)
+
+[ARPA Sardegna, Protezione Civile Regione Sardegna](http://www.sardegnaambiente.it/)
+
+[Autorita di Bacino della Regione Siciliana](https://pti.regione.sicilia.it/)
+
+[ARPA Campania](https://www.arpacampania.it/)
+
+[Centro Funzionale Regione Campania](http://centrofunzionale.regione.campania.it/)
+
+[Centro Funzionale della Regione Marche](https://www.regione.marche.it/Regione-Utile/Protezione-Civile/Strutture-Operative/Centro-Funzionale-Multirischi)
+
+[Centro Funzionale - Dipartimento di Protezione Civile della Regione Molise](https://www.protezionecivile.molise.it)
+
+[Consorzio LaMMA](http://www.lamma.rete.toscana.it/) 
+
+[Servizio Idrologico del Centro Funzionale della Regione Toscana](http://www.sir.toscana.it/)
+
+[Servizio Idrografico Regione Umbria](https://www.regione.umbria.it/ambiente/servizio-idrografico)
+
+[Centro Funzionale Multirischi di Protezione Civile - Giunta Regionale della Campania](http://www.regione.campania.it/regione/it/regione/giunta )
+
+[Centro Funzionale Decentrato Regione Basilicata](http://www.centrofunzionalebasilicata.it/it/)
+
+[Centro Funzionale Multirischi della Regione Calabria](https://www.cfd.calabria.it/)
+
+[ARPA Calabria](http://www.arpacal.it/)
+
+[ARPAE-SIMC](https://www.arpae.it)
+
+[ARPA Liguria e Centro Funzionale della Regione Liguria ARPAL](https://www.arpal.liguria.it/homepage/meteo.html)
+
+[ARPA Piemonte - Dipartimento Servizi Previsionali](http://www.arpa.piemonte.it/)
+
+[Centro Funzionale Regionale della Regione Autonoma Valle d'Aosta](https://cf.regione.vda.it/)
+
+[ARPA Lombardia - Servizio Meteorologico Regionale](https://www.arpalombardia.it/Pages/Meteorologia/Previsioni-e-Bollettini.aspx#/topPagina)
+
+[Provincia Autonoma di Trento](http://www.provincia.tn.it/)
+
+[Provincia Autonoma di Bolzano](https://meteo.provincia.bz.it/)
+
+[ARPA Veneto Dipartimento Regionale per la Sicurezza del Territorio](https://www.arpa.veneto.it/)
+
+[ARPA Friuli Venezia Giulia - OSMER Osservatorio Meteorologico Regionale](https://www.osmer.fvg.it/home.php)

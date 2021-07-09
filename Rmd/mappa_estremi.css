@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@300&display=swap');
+
+*{
+  font-family: Roboto,sans-serif;
+}
+
+.leaflet-popup-content-wrapper{
+  background-color: #F2F0ED;
+}
+
+.leaflet-popup-content-wrapper h3{
+  font-family: Lora,serif;
+  color: #B96246;
+}
+
+.leaflet-popup-content-wrapper h4{
+  font-family: Lora,serif;
+  color: #828B9C;
+}
+
+
+.leaflet-control-layers-expanded{
+  background-color: #F2F0ED;
+}
+
+.leaflet-bar.easy-button-container.leaflet-control{
+  background-color: #F2F0ED;
+  color: #000000;
+}
+
+
+/* layout pagina */
+
+body{
+  background:  black;
+}
+
+.value-box .value{
+  font-size: 20px;
+}
+
+
+.navbar-inverse{
+  background-color: #a0c8eb;
+  border-color: #a0c8eb;
+}
+
+
+.navbar-inverse{
+  background-color: white;
+  border-color: white;
+}
+
+.navbar-inverse .navbar-brand{
+  color: #000000;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus{
+  color: #000000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #000000;
+}
