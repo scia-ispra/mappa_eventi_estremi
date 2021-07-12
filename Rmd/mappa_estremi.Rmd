@@ -36,7 +36,7 @@ valueBox("Inverno (Gennaio - Febbraio)",icon="",col="#1f78b4")
 valueBox("Primavera",icon="",color="#33a02c")
 ```
 
-### Moderatamente piovosa, con temporali, piogge intense, forte vento e locali grandinate.
+### Moderatamente piovosa, con temporali, piogge intense, forte vento e locali grandinate
 
 ```{r}
 valueBox("Estate",icon="", col="#ff7f00")
@@ -48,7 +48,7 @@ valueBox("Estate",icon="", col="#ff7f00")
 valueBox("Autunno",icon="",col="#fdb462")
 ```
 
-### Precipitazioni eccezionalmente abbondanti al centro-nord, venti intensi sul Tirreno
+### Precipitazioni eccezionalmente abbondanti al centro-nord, venti intensi sul Tirreno a fine mese
 
 ```{r}
 valueBox("Dicembre",icon="",color="#1f78b4")

@@ -4,7 +4,7 @@ library("tidyverse")
 ANNO<-2020
 INCLUDI_NOAA<-FALSE
 
-nomeFile<-"2020_Eventi_estremi_Italia_per_rapporto_ISPRA_NOAA_07_07_21.csv"
+nomeFile<-"2020_Eventi_estremi_Italia_per_rapporto_ISPRA_NOAA_09_07_21.csv"
 
 read_delim(nomeFile,delim=";",col_names = TRUE,locale=locale(decimal_mark = "."),col_types = cols(Lon=col_character(),Lat=col_character())) %>%
   mutate(Lon=round(as.double(Lon),2),
