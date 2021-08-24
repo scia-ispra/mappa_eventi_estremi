@@ -1,2 +1,3 @@
-# mappa_eventi_estremi
-Prova della mappa per Rapporto Indicatori del Clima
+# Mappa_eventi_estremi
+
+Codice per la mappa per Rapporto Indicatori del Clima
